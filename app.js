@@ -3,9 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const mongoURI = 'mongodb+srv://yaduvanshirohan4:8595rohAN@cluster0.c1hfg.mongodb.net/book?retryWrites=true&w=majority?authSource=book&w=1';
+
+mongoose.connect( mongoURI ,{useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connection
+  .once('open', ()=> console.log('connected..'))
+  .on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var app = express();
 
